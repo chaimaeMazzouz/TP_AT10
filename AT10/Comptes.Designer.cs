@@ -268,7 +268,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Comptes";
-            this.Text = "Gestion Banque BindingMangerBase";
+            this.Text = "Gestion Comptes";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Comptes_FormClosing);
             this.Load += new System.EventHandler(this.Comptes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

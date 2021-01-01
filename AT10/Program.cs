@@ -16,7 +16,7 @@ namespace AT10
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Comptes());
+            Application.Run(new Home());
         }
     }
 }
