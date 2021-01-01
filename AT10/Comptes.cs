@@ -61,5 +61,77 @@ namespace AT10
             bmbCompte.Position = bmbCompte.Count -1;
 
         }
+
+        private void btnNouveau_Click(object sender, EventArgs e)
+        {
+            textSolde.ReadOnly = false;
+            bmbCompte.AddNew();
+        }
+        Boolean BL = false;
+        private void btnAjouter_Click(object sender, EventArgs e)
+        {
+            if (txtNumCompte.Text !="" && textSolde.Text !="" && comboTypeCompte.Text != "")
+            {
+                try
+                {
+                    bmbCompte.EndCurrentEdit();
+                    textSolde.ReadOnly = true;
+                    BL = true;
+                    dataGridView1.Refresh();
+                    MessageBox.Show("Compte inséré","Ajout Compte",MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    bmbCompte.AddNew();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erreur1 : "+ex.Message, "Erreur", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez remplir les champs", "Warning", MessageBoxButtons.OK,
+                       MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnModifier_Click(object sender, EventArgs e)
+        {
+            bmbCompte.EndCurrentEdit();
+            BL = true;
+            MessageBox.Show("Compte modifié", "Modification Compte", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+
+        private void btnSupprimer_Click(object sender, EventArgs e)
+        {
+            bmbCompte.RemoveAt(bmbCompte.Position);
+            BL = true;
+            MessageBox.Show("Compte supprimé", "Suppression Compte", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+
+        private void Comptes_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (BL)
+            {
+                DialogResult rep =
+                    MessageBox.Show("Voulez vous Appliquer les mis à jours à la source de données", "Confirmation", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+                if (rep == DialogResult.Yes)
+                {
+                    try
+                    {
+                        SqlCommandBuilder Bld = new SqlCommandBuilder(Adp_Comptes);
+                        Adp_Comptes.Update(Ds_Banque.Tables["Comptes"]);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erreur2 : " + ex.Message, "Erreur", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
     }
 }

@@ -195,6 +195,7 @@
             this.btnNouveau.TabIndex = 51;
             this.btnNouveau.Text = "Nouveau";
             this.btnNouveau.UseVisualStyleBackColor = false;
+            this.btnNouveau.Click += new System.EventHandler(this.btnNouveau_Click);
             // 
             // btnAjouter
             // 
@@ -207,6 +208,7 @@
             this.btnAjouter.TabIndex = 52;
             this.btnAjouter.Text = "Ajouter";
             this.btnAjouter.UseVisualStyleBackColor = false;
+            this.btnAjouter.Click += new System.EventHandler(this.btnAjouter_Click);
             // 
             // btnModifier
             // 
@@ -219,6 +221,7 @@
             this.btnModifier.TabIndex = 53;
             this.btnModifier.Text = "Modifier";
             this.btnModifier.UseVisualStyleBackColor = false;
+            this.btnModifier.Click += new System.EventHandler(this.btnModifier_Click);
             // 
             // btnSupprimer
             // 
@@ -231,6 +234,7 @@
             this.btnSupprimer.TabIndex = 54;
             this.btnSupprimer.Text = "Supprimer";
             this.btnSupprimer.UseVisualStyleBackColor = false;
+            this.btnSupprimer.Click += new System.EventHandler(this.btnSupprimer_Click);
             // 
             // dataGridView1
             // 
@@ -265,6 +269,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Comptes";
             this.Text = "Gestion Banque BindingMangerBase";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Comptes_FormClosing);
             this.Load += new System.EventHandler(this.Comptes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
