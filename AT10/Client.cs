@@ -68,7 +68,6 @@ namespace AT10
             bmbCompte.AddNew();
         }
         Boolean BL = false;
-
         private void btnAjouter_Click(object sender, EventArgs e)
         {
             if (txtNumClient.Text != "" && textNomClient.Text != "" && textPrenomClient.Text != "")

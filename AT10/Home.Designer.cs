@@ -68,6 +68,7 @@
             this.mouvementToolStripMenuItem.Name = "mouvementToolStripMenuItem";
             this.mouvementToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
             this.mouvementToolStripMenuItem.Text = "Mouvement";
+            this.mouvementToolStripMenuItem.Click += new System.EventHandler(this.mouvementToolStripMenuItem_Click);
             // 
             // virementToolStripMenuItem
             // 

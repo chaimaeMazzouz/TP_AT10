@@ -26,5 +26,10 @@ namespace AT10
             Changer_Form(new Client());
 
         }
+
+        private void mouvementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Changer_Form(new Mouvement());
+        }
     }
 }
