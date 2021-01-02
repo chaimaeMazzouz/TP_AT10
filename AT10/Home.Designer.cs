@@ -61,6 +61,7 @@
             this.clientToolStripMenuItem.Name = "clientToolStripMenuItem";
             this.clientToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.clientToolStripMenuItem.Text = "Client";
+            this.clientToolStripMenuItem.Click += new System.EventHandler(this.clientToolStripMenuItem_Click);
             // 
             // mouvementToolStripMenuItem
             // 

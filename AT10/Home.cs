@@ -20,5 +20,11 @@ namespace AT10
         {
             Changer_Form(new Comptes());
         }
+
+        private void clientToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Changer_Form(new Client());
+
+        }
     }
 }
