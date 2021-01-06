@@ -10,8 +10,10 @@ namespace AT10
     {
         static Global g1 = new Global();
         DataSet Ds_Banque = new DataSet();
-        SqlDataAdapter Adp_Comptes = new SqlDataAdapter("select * from Compte", g1.banque_connexion);
-        SqlDataAdapter Adp_Mouvements = new SqlDataAdapter("select * from Mouvement", g1.banque_connexion);
+        SqlDataAdapter Adp_Comptes = new SqlDataAdapter("select * from Compte"
+            , g1.banque_connexion);
+        SqlDataAdapter Adp_Mouvements = new SqlDataAdapter("select * from Mouvement"
+            , g1.banque_connexion);
         DataView DvCompte;
         BindingManagerBase bmbMouvement;
         public Mouvement()
@@ -33,8 +35,9 @@ namespace AT10
 
             dataGridView1.DataSource = Ds_Banque.Tables["Mouvements"];
             dataGridView2.DataSource = Ds_Banque.Tables["Comptes"];
-            comboNumCompte.DataSource = Ds_Banque.Tables["Comptes"];
             comboNumCompte.DisplayMember = "Num_Compte";
+            comboNumCompte.ValueMember = "Num_Compte";
+            comboNumCompte.DataSource = Ds_Banque.Tables["Comptes"];
         }
 
         private void btnPremier_Click(object sender, EventArgs e)
@@ -64,7 +67,6 @@ namespace AT10
         private void btnNouveau_Click(object sender, EventArgs e)
         {
             bmbMouvement.AddNew();
-
             textDateMouvement.Text = DateTime.Now.ToString();
 
         }
@@ -84,7 +86,7 @@ namespace AT10
                 {
                     try
                     {
-                       
+                        DvCompte[0].BeginEdit();
                         if (comboTypeMouvement.Text == "Retrait")
                         {
                             DvCompte[0]["Solde"] = Convert.ToDecimal(DvCompte[0]["Solde"]) - Convert.ToDecimal(textMontant.Text);
@@ -93,10 +95,11 @@ namespace AT10
                         {
                             DvCompte[0]["Solde"] = Convert.ToDecimal(DvCompte[0]["Solde"]) + Convert.ToDecimal(textMontant.Text);
                         }
+                        DvCompte[0].EndEdit();
                         bmbMouvement.EndCurrentEdit();
                         BL = true;
                         dataGridView1.Refresh();
-                        MessageBox.Show("Compte inséré", "Ajout Client", MessageBoxButtons.OK,
+                        MessageBox.Show("Mouvement inséré", "Ajout Mouvement", MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
                         MessageBox.Show("Ajout effectué");
                     }
@@ -110,6 +113,66 @@ namespace AT10
             else
             {
                 MessageBox.Show("remplir les champs!!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void Mouvement_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (BL)
+            {
+                DialogResult rep =
+                    MessageBox.Show("Voulez vous Appliquer les mis à jours à la source de données", "Confirmation", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+                if (rep == DialogResult.Yes)
+                {
+                    try
+                    {
+                        SqlCommandBuilder Bld = new SqlCommandBuilder(Adp_Mouvements);
+                        SqlCommandBuilder BldC = new SqlCommandBuilder(Adp_Comptes);
+                        Adp_Mouvements.Update(Ds_Banque.Tables["Mouvements"]);
+                        Adp_Comptes.Update(Ds_Banque.Tables["Comptes"]);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erreur2 : " + ex.Message, "Erreur", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void btnSupprimer_Click(object sender, EventArgs e)
+        {
+            DvCompte = new DataView(Ds_Banque.Tables["Comptes"], "Num_Compte=" +
+               comboNumCompte.SelectedValue, "", DataViewRowState.CurrentRows);
+            if (comboTypeMouvement.Text == "Dépôt" && Convert.ToDecimal(DvCompte[0]["Solde"]) <= Convert.ToDecimal(textMontant.Text))
+            {
+                MessageBox.Show("Solde inssuffissant");
+            }
+            else
+            {
+                try
+                {
+                    DvCompte[0].BeginEdit();
+                    if (comboTypeMouvement.Text == "Retrait")
+                    {
+                        DvCompte[0]["Solde"] = Convert.ToDecimal(DvCompte[0]["Solde"]) + Convert.ToDecimal(textMontant.Text);
+                    }
+                    else
+                    {
+                        DvCompte[0]["Solde"] = Convert.ToDecimal(DvCompte[0]["Solde"]) - Convert.ToDecimal(textMontant.Text);
+                    }
+                    DvCompte[0].EndEdit();
+                    bmbMouvement.RemoveAt(bmbMouvement.Position);
+                    BL = true;
+                    MessageBox.Show("Mouvement supprimé", "Suppression Mouvement", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
     }

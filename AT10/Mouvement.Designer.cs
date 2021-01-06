@@ -30,7 +30,6 @@
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnSupprimer = new System.Windows.Forms.Button();
-            this.btnModifier = new System.Windows.Forms.Button();
             this.btnAjouter = new System.Windows.Forms.Button();
             this.btnNouveau = new System.Windows.Forms.Button();
             this.btnDernier = new System.Windows.Forms.Button();
@@ -68,31 +67,20 @@
             this.btnSupprimer.BackColor = System.Drawing.Color.LightCoral;
             this.btnSupprimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSupprimer.ForeColor = System.Drawing.Color.White;
-            this.btnSupprimer.Location = new System.Drawing.Point(559, 205);
+            this.btnSupprimer.Location = new System.Drawing.Point(570, 185);
             this.btnSupprimer.Name = "btnSupprimer";
             this.btnSupprimer.Size = new System.Drawing.Size(98, 35);
             this.btnSupprimer.TabIndex = 72;
             this.btnSupprimer.Text = "Supprimer";
             this.btnSupprimer.UseVisualStyleBackColor = false;
-            // 
-            // btnModifier
-            // 
-            this.btnModifier.BackColor = System.Drawing.Color.LightCoral;
-            this.btnModifier.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModifier.ForeColor = System.Drawing.Color.White;
-            this.btnModifier.Location = new System.Drawing.Point(559, 161);
-            this.btnModifier.Name = "btnModifier";
-            this.btnModifier.Size = new System.Drawing.Size(98, 35);
-            this.btnModifier.TabIndex = 71;
-            this.btnModifier.Text = "Modifier";
-            this.btnModifier.UseVisualStyleBackColor = false;
+            this.btnSupprimer.Click += new System.EventHandler(this.btnSupprimer_Click);
             // 
             // btnAjouter
             // 
             this.btnAjouter.BackColor = System.Drawing.Color.LightCoral;
             this.btnAjouter.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAjouter.ForeColor = System.Drawing.Color.White;
-            this.btnAjouter.Location = new System.Drawing.Point(559, 112);
+            this.btnAjouter.Location = new System.Drawing.Point(570, 136);
             this.btnAjouter.Name = "btnAjouter";
             this.btnAjouter.Size = new System.Drawing.Size(98, 35);
             this.btnAjouter.TabIndex = 70;
@@ -105,7 +93,7 @@
             this.btnNouveau.BackColor = System.Drawing.Color.LightCoral;
             this.btnNouveau.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNouveau.ForeColor = System.Drawing.Color.White;
-            this.btnNouveau.Location = new System.Drawing.Point(559, 62);
+            this.btnNouveau.Location = new System.Drawing.Point(570, 86);
             this.btnNouveau.Name = "btnNouveau";
             this.btnNouveau.Size = new System.Drawing.Size(98, 35);
             this.btnNouveau.TabIndex = 69;
@@ -311,7 +299,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnSupprimer);
-            this.Controls.Add(this.btnModifier);
             this.Controls.Add(this.btnAjouter);
             this.Controls.Add(this.btnNouveau);
             this.Controls.Add(this.btnDernier);
@@ -329,6 +316,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Mouvement";
             this.Text = "Gestion Mouvements";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Mouvement_FormClosing);
             this.Load += new System.EventHandler(this.Mouvement_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
@@ -341,7 +329,6 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnSupprimer;
-        private System.Windows.Forms.Button btnModifier;
         private System.Windows.Forms.Button btnAjouter;
         private System.Windows.Forms.Button btnNouveau;
         private System.Windows.Forms.Button btnDernier;

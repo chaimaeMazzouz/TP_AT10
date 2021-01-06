@@ -75,6 +75,7 @@
             this.virementToolStripMenuItem.Name = "virementToolStripMenuItem";
             this.virementToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.virementToolStripMenuItem.Text = "Virement";
+            this.virementToolStripMenuItem.Click += new System.EventHandler(this.virementToolStripMenuItem_Click);
             // 
             // Home
             // 

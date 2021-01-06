@@ -31,5 +31,10 @@ namespace AT10
         {
             Changer_Form(new Mouvement());
         }
+
+        private void virementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Changer_Form(new Virement());
+        }
     }
 }
